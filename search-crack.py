@@ -50,11 +50,11 @@ def tcrack():
         os.system('mkdir save')
     elif str(folder) == 'True':
         rien = 0
-
-    imgascii()
     
-    crack = Write.Input('Quelle type de crack veux tu ? (multi ou solo) :',
+    crack = Write.Input('\nQuelle type de crack veux tu ? (multi ou solo) :',
                     Colors.green_to_red, interval=0.005)
+    
+    imgascii()
 
     if crack == 'multi':
         jeux = Write.Input('Quelle jeux veux-tu en multijoueur ?',
@@ -136,11 +136,15 @@ def tcrack():
 
     else:
         if crack == 'solo':
-            print('pas encore finis')
+            Write.Print('pas encore finis',
+                    Colors.green_to_red, interval=0.005)
+            return tcrack
             
         else:
-            print("Votre réponse n'est pas bonne.")
-            print("Veuillé réessaye")
+            Write.Print("Votre réponse n'est pas bonne veuille réessaye.",
+                    Colors.red, interval=0.005)
+            Write.Print("\nVeuillé réessaye",
+                    Colors.red, interval=0.005)
             return tcrack()
 
 tcrack()
