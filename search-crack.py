@@ -137,12 +137,14 @@ def tcrack():
         elif str(validation) == '404':
             Write.Print("Pas de crack de ce jeux trouver.",
                     Colors.green_to_red, interval=0.005)
+            time.sleep(1)
             return tcrack()              
 
     else:
         if crack == 'solo':
             Write.Print('pas encore finis',
                     Colors.green_to_red, interval=0.005)
+            time.sleep(1)
             return tcrack()
             
         else:
