@@ -138,7 +138,7 @@ def tcrack():
         if crack == 'solo':
             Write.Print('pas encore finis',
                     Colors.green_to_red, interval=0.005)
-            return tcrack
+            return tcrack()
             
         else:
             Write.Print("Votre réponse n'est pas bonne veuille réessaye.",
