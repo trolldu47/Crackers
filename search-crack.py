@@ -1,7 +1,9 @@
+from re import T
 import requests
 from bs4 import BeautifulSoup
 from pystyle import Colorate, Colors, System, Center, Write, Anime
 import os
+import time
 
 crackers = """
  ██████ ██████   █████   ██████ ██   ██ ███████ ██████  ███████ 
@@ -44,6 +46,7 @@ def imgascii():
 
 def tcrack():
     
+    imgascii()
     folder = os.path.isdir('save')
 
     if str(folder) == 'False':
@@ -53,7 +56,7 @@ def tcrack():
     
     crack = Write.Input('\nQuelle type de crack veux tu ? (multi ou solo) :',
                     Colors.green_to_red, interval=0.005)
-    
+
     imgascii()
 
     if crack == 'multi':
@@ -132,7 +135,9 @@ def tcrack():
                     Colors.green_to_red, interval=0.005)
 
         elif str(validation) == '404':
-            print("Ce crack n'est pas disponible en multijoueur")                   
+            Write.Print("Pas de crack de ce jeux trouver.",
+                    Colors.green_to_red, interval=0.005)
+            return tcrack()              
 
     else:
         if crack == 'solo':
@@ -145,6 +150,7 @@ def tcrack():
                     Colors.red, interval=0.005)
             Write.Print("\nVeuillé réessaye",
                     Colors.red, interval=0.005)
+            time.sleep(1)
             return tcrack()
 
 tcrack()
