@@ -6,7 +6,7 @@ Crackers is a program that allows you to find the best crack whether it is multi
 Download Crackers(exe).zip from this link
 
 ```bash
-  https://github.com/trolldu47/Search-crack/releases/tag/python
+  https://github.com/trolldu47/Search-crack/releases
 ```
 
 Unzip the file and execute Cracker.exe in the Crackers folders.
