@@ -1,9 +1,10 @@
-from re import T
+from unittest import result
 import requests
 from bs4 import BeautifulSoup
 from pystyle import Colorate, Colors, System, Center, Write, Anime
 import os
 import time
+import re
 
 crackers = """
  ██████ ██████   █████   ██████ ██   ██ ███████ ██████  ███████ 
@@ -38,6 +39,9 @@ System.Title("Crackers")
 Anime.Fade(Center.Center(banner), Colors.green_to_red,
            Colorate.Diagonal, enter=True)
 
+def change_date_format(dt):
+        return re.sub(r'(\d{4})-(\d{1,2})-(\d{1,2})', '\\3-\\2-\\1', dt)
+
 def imgascii():
     System.Clear()
     print("\n"*2)
@@ -71,6 +75,7 @@ def tcrack():
             requete = requests.get(final)
             page = requete.content
             soup = BeautifulSoup(page, 'lxml')
+            
             for link in soup.find_all("a", {"class": "direct"}):
                 lien = (link.get('href'))
 
@@ -83,14 +88,36 @@ def tcrack():
 
             for torrent in soup.find_all("a", {"class": "torrent"}):
                 torrent = (torrent.get('href'))
+
+            update = ''
+            result = ''
             
-            savelink = Write.Input('Voulez-vous sauvegarde le lien de telechargement ? (1 = oui/2 = non) :',
+            for update in soup.find_all("time", {"class": "entry-date"}):
+                update = (update.get('title'))
+            update2 = str(update)
+            update2, result = update2[:-1], update2[-1]
+            update2, result = update2[:-1], update2[-1]
+            update2 = update2.replace(":", "")
+            update2, result = update2[:-1], update2[-1]
+            update2, result = update2[:-1], update2[-1]
+            update2 = change_date_format(update2)
+
+            imgascii()
+            
+            Write.Print("Voici les informations sur le cracks:",
+                    Colors.green_to_red, interval=0.005)
+
+            Write.Print("\nDate de la dernire mise à jour du crack: " + str(update2),
+                    Colors.green_to_red, interval=0.005)            
+            
+            savelink = Write.Input('\n\nVoulez-vous sauvegarde le lien de telechargement ? (1 = oui/2 = non) :',
                     Colors.green_to_red, interval=0.005)
             
             if savelink == '1':
 
                 imgascii()
                 
+                jeux = jeux.replace(" ", "-")
                 fichier = open('save/' + jeux + '.txt', "w")
                 fichier.write('Lien direct pour télécharge le jeux: ' + lien)
                 if patch == '':
@@ -105,14 +132,12 @@ def tcrack():
 
                 Write.Print("Pour retrouve c'est lien sauvegarde vous les trouverés dans le fichier save où se trouve le programme.",
                     Colors.green_to_red, interval=0.005)
-                
-                acce = Write.Input("\nVoulez-vous y acceder en ecrivant oui le programme vous ouvrira directement l'accés au fichier save au sinon vous pouvez ecrire non.: ",
-                    Colors.green_to_red, interval=0.005)
 
-                if acce == 'oui':
-                    os.system('start save')
-                else:
-                    rien = '0'
+                Write.Print("\nPour fermer le programme il vous suffit juste de ferme le bloc-notes",
+                    Colors.green_to_red, interval=0.005)               
+
+                repertoire = (jeux + '.txt')
+                os.system('start /w save/' + repertoire)
 
             else:
                 imgascii()
