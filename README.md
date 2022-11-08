@@ -37,7 +37,7 @@ Install dependencies
 Start the Search-crack
 
 ```bash
-  python search-crack.py
+  python Crackers.py
 ```
 
 
