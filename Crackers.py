@@ -1,10 +1,6 @@
-from unittest import result
-import requests
+import requests, time, re, os, tkinter
 from bs4 import BeautifulSoup
 from pystyle import Colorate, Colors, System, Center, Write, Anime
-import os
-import time
-import re
 
 crackers = """
  ██████ ██████   █████   ██████ ██   ██ ███████ ██████  ███████ 
@@ -31,14 +27,15 @@ banner = """
  //  /`"              `      `\                                    
 //"""
 
-
-System.Clear()
-System.Size(160, 50)
-System.Title("Crackers")
-
-Anime.Fade(Center.Center(banner), Colors.green_to_red,
-           Colorate.Diagonal, enter=True)
-
+def oui():
+    os.system('msg * Starting update')
+    app.destroy()
+    os.system('start updater.exe')
+    
+def non():
+    app.destroy()
+    tcrack() 
+    
 def change_date_format(dt):
         return re.sub(r'(\d{4})-(\d{1,2})-(\d{1,2})', '\\3-\\2-\\1', dt)
 
@@ -49,7 +46,12 @@ def imgascii():
     print("\n"*5)
 
 def tcrack():
+    System.Clear()
+    System.Size(160, 50)
+    System.Title("Crackers")
     
+    Anime.Fade(Center.Center(banner), Colors.green_to_red,
+           Colorate.Diagonal, enter=True)
     imgascii()
     folder = os.path.isdir('save')
 
@@ -91,7 +93,6 @@ def tcrack():
 
             update = ''
             result = ''
-            
             for update in soup.find_all("time", {"class": "entry-date"}):
                 update = (update.get('title'))
             update2 = str(update)
@@ -180,4 +181,30 @@ def tcrack():
             time.sleep(1)
             return tcrack()
 
-tcrack()
+fichier = open('version.txt', "r")
+test = fichier.read()
+fichier.close
+    
+requete = requests.get("https://github.com/trolldu47/Crackers/blob/main/version.txt")
+page = requete.content
+soup = BeautifulSoup(page, 'lxml')
+link = soup.find("td", {"class": "blob-code blob-code-inner js-file-line"})
+test2 = (link.get_text())
+    
+if test == test2:   
+    tcrack()
+    
+else:
+    app = tkinter.Tk()
+    app.title("")
+    app.geometry('150x100')
+
+    text = tkinter.Label(app, text="Update Crackers ?", font=(40))
+    ouib = tkinter.Button(app, text="OUI", bg="green", command=oui)
+    nonb = tkinter.Button(app, text="NON", bg="red", command=non)
+
+    text.pack()
+    ouib.pack(side="left", ipadx="21")
+    nonb.pack(side="right", ipadx="21")
+    app.mainloop()
+
